@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4dc9b59c6f2843109db61f2b94af622, type: 3}
+  m_Name: Sound
+  m_EditorClassIdentifier: 
+  MUSIC_BACKGROUND: {fileID: 8300000, guid: 19b4f7497ff9449bbaa9fbe8959e2fe3, type: 3}
+  SFX_PICK_RIGHT: {fileID: 8300000, guid: 52ee92ef21b2347df99de0826d4e4b49, type: 3}
+  SFX_PICK_WRONG: {fileID: 8300000, guid: d47cd0e74a0e449baac0819784703603, type: 3}
+  SFX_TIMECOUNT: {fileID: 8300000, guid: a3f924df24936413e861fa83b7b2853c, type: 3}
+  SFX_GAMEOVER: {fileID: 8300000, guid: 99e4a3a7b27b943de9551029c5f7da38, type: 3}
