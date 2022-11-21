@@ -1,6 +1,7 @@
 # memory_square2d
 
 Play:
+- https://duyongoc.github.io/memory_square2d_web
 - https://play.unity.com/mg/other/memory_squares2d_web
 - https://duyongoc.itch.io/memory-square2d
 
