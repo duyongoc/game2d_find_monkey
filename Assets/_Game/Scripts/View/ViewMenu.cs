@@ -56,7 +56,7 @@ public class ViewMenu : View
 
     public void OnClickButtonPlay()
     {
-        GameMgr.Instance.PlayGameWithInfo();
+        GameManager.Instance.PlayGameWithInfo();
     }
 
 

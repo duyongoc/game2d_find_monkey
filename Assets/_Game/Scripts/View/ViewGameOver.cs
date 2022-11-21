@@ -59,7 +59,7 @@ public class ViewGameOver : View
     {
         if (Input.GetMouseButtonUp(0))
         {
-            GameMgr.Instance.ReplayGame();
+            GameManager.Instance.ReplayGame();
         }
     }
 
@@ -68,9 +68,9 @@ public class ViewGameOver : View
     }
 
 
-    private async void ShowScore()
+    private  void ShowScore()
     {
-        int score = ScoreMgr.Instance.score;
+        int score = ScoreManager.Instance.score;
         textHighScore.text = score.ToString();
 
         try

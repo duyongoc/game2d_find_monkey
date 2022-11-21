@@ -77,14 +77,14 @@ public class ViewInGame : View
     public void StartCountTime(float value)
     {
         _cancelCounting = false;
-        CountingTime(value, () => { GameScene.Instance.ShowLose($"Out of time!\n Do you wanna play again? "); });
+        CountingTime(value, () => { GameController.Instance.ShowLose($"Out of time!\n Do you wanna play again? "); });
     }
 
 
     public void CancelCounting()
     {
         _cancelCounting = true;
-        SoundMgr.StopSFX(SoundMgr.SFX_TIMECOUNT);
+        SoundManager.StopSFX(SoundManager.SFX_TIMECOUNT);
     }
 
 
@@ -102,7 +102,7 @@ public class ViewInGame : View
 
             if(currentTimer <= 2 && !playsound)
             {
-                SoundMgr.PlaySFXOneShot(SoundMgr.SFX_TIMECOUNT);
+                SoundManager.PlaySFXOneShot(SoundManager.SFX_TIMECOUNT);
                 playsound = true;
             }
 
