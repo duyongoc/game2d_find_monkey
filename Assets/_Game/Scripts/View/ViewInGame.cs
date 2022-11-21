@@ -42,42 +42,30 @@ public class ViewInGame : View
     public override void StartState()
     {
         base.StartState();
-        StartView();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        UpdateView();
     }
 
     public override void EndState()
     {
         base.EndState();
-        EndView();
     }
     #endregion
 
 
-
-    private void StartView()
-    {
-    }
-
-    private void UpdateView()
-    {
-    }
-
-    private void EndView()
-    {
-    }
 
 
 
     public void StartCountTime(float value)
     {
         _cancelCounting = false;
-        CountingTime(value, () => { GameController.Instance.ShowLose($"Out of time!\n Do you wanna play again? "); });
+        CountingTime(value, () =>
+        {
+            GameController.Instance.ShowLose($"Out of time!\n Do you wanna play again? ");
+        });
     }
 
 
@@ -100,7 +88,7 @@ public class ViewInGame : View
             currentTimer -= .01f;
             sliderTimer.value = currentTimer;
 
-            if(currentTimer <= 2 && !playsound)
+            if (currentTimer <= 2 && !playsound)
             {
                 SoundManager.PlaySFXOneShot(SoundManager.SFX_TIMECOUNT);
                 playsound = true;
@@ -138,7 +126,8 @@ public class ViewInGame : View
 
     private void PlayWrongAnimation()
     {
-        textWrong.transform.DOScale(Vector3.one * 1.2f, 1).SetEase(Ease.InOutQuad)
+        textWrong.transform.DOScale(Vector3.one * 1.2f, 1)
+            .SetEase(Ease.InOutQuad)
             .OnComplete(() =>
             {
                 textWrong.transform.localScale = Vector3.one;

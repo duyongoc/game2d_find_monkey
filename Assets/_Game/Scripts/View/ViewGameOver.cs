@@ -31,44 +31,29 @@ public class ViewGameOver : View
     public override void StartState()
     {
         base.StartState();
-        StartView();
+        ShowScore();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        UpdateView();
-    }
 
-    public override void EndState()
-    {
-        base.EndState();
-        EndView();
-    }
-    #endregion
-
-
-
-    private void StartView()
-    {
-        ShowScore();
-
-    }
-
-    private void UpdateView()
-    {
         if (Input.GetMouseButtonUp(0))
         {
             GameManager.Instance.ReplayGame();
         }
     }
 
-    private void EndView()
+    public override void EndState()
     {
+        base.EndState();
+
     }
+    #endregion
 
 
-    private  void ShowScore()
+
+    private void ShowScore()
     {
         int score = ScoreManager.Instance.score;
         textHighScore.text = score.ToString();
