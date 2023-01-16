@@ -14,7 +14,6 @@ public class UILeaderboard : MonoBehaviour
     [SerializeField] private GameObject objLeaderBoard;
     [SerializeField] private GameObject objUpdateInfo;
     [SerializeField] private GameObject objLoading;
-    [SerializeField] private GameObject noResultFound;
 
     [Header("Leader Board")]
     [SerializeField] private int scrollOffet = 10;
@@ -47,7 +46,6 @@ public class UILeaderboard : MonoBehaviour
         ShowObjLeaderBoard(false);
         ShowObjUpdateInfo(false);
         ShowObjLoading(false);
-        ShowNoResultFound(false);
     }
 
 
@@ -143,12 +141,6 @@ public class UILeaderboard : MonoBehaviour
     public void ShowObjLoading(bool value)
     {
         objLoading.SetActive(value);
-    }
-    
-    
-    public void ShowNoResultFound(bool value)
-    {
-        noResultFound.SetActive(value);
     }
 
 

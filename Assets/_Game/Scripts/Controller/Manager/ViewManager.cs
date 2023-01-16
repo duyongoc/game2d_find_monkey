@@ -8,7 +8,7 @@ public class ViewManager : MonoBehaviour
 
     // DI
     // [Inject] private ViewLoading _viewLoading;
-    [Inject] private ViewInfo _viewInfo;
+    // [Inject] private ViewInfo _viewInfo;
     [Inject] private ViewMenu _viewMenu;
     [Inject] private ViewInGame _viewInGame;
     [Inject] private ViewGameOver _viewGameOver;
@@ -21,7 +21,7 @@ public class ViewManager : MonoBehaviour
 
 
     // properties
-    public ViewInfo GetViewInfo => _viewInfo;
+    // public ViewInfo GetViewInfo => _viewInfo;
 
 
 
@@ -52,7 +52,7 @@ public class ViewManager : MonoBehaviour
     {
         switch (viewName)
         {
-            case "Info": SetState(_viewInfo); break;
+            // case "Info": SetState(_viewInfo); break;
             // case "Loading": SetState(_viewLoading); break;
             case "Menu": SetState(_viewMenu); break;
             case "InGame": SetState(_viewInGame); break;

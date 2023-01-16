@@ -16,7 +16,7 @@ public class GameController : Singleton<GameController>
     public int canWrong = 5;
 
     [Header("View infomation")]
-    public ViewInfo viewInfo;
+    // public ViewInfo viewInfo;
 
 
     // DI
@@ -127,7 +127,7 @@ public class GameController : Singleton<GameController>
     public void ShowLose(string content)
     {
         viewInGame.CancelCounting();
-        viewInfo.ShowInfo(content, () => { ResetGame(); });
+        viewInGame.ShowInfo(content, () => { ResetGame(); });
     }
 
 
@@ -142,14 +142,14 @@ public class GameController : Singleton<GameController>
         string content = $"Level passed: \n {_currentIndex}";
         DOVirtual.DelayedCall(0.75f, () =>
         {
-            viewInfo.ShowInfo(content, () => { ResetTurn(); });
+            viewInGame.ShowInfo(content, () => { ResetTurn(); });
         });
     }
 
 
     public void ShowInfo(string content, System.Action callback)
     {
-        viewInfo.ShowInfo(content, callback);
+        viewInGame.ShowInfo(content, callback);
     }
 
 

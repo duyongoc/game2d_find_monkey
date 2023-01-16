@@ -11,17 +11,20 @@ public class ViewInGame : View
 {
 
 
-    [Header("Text")]
+    [Header("[Text]")]
     [SerializeField] private TMP_Text textLevel;
     [SerializeField] private TMP_Text textRemain;
     [SerializeField] private TMP_Text textWrong;
+    [SerializeField] private TMP_Text txtInfo;
 
     [Space(10)]
     [SerializeField] private Slider sliderTimer;
+    [SerializeField] private GameObject objInfo;
 
 
-    // private
+    // [private]
     private bool _cancelCounting = false;
+    private System.Action callbackContinue;
 
 
 
@@ -53,8 +56,6 @@ public class ViewInGame : View
         base.EndState();
     }
     #endregion
-
-
 
 
 
@@ -131,6 +132,21 @@ public class ViewInGame : View
             {
                 textWrong.transform.localScale = Vector3.one;
             });
+    }
+
+
+    public void ShowInfo(string content, System.Action callback)
+    {
+        objInfo.SetActive(true);
+        txtInfo.text = content;
+        callbackContinue = callback;
+    }
+
+
+    public void OnClickButtonContinue()
+    {
+        callbackContinue?.Invoke();
+        objInfo.SetActive(false);
     }
 
 
