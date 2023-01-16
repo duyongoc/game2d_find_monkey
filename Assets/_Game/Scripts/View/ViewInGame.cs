@@ -11,7 +11,6 @@ public class ViewInGame : View
 {
 
 
-    // inspector
     [Header("Text")]
     [SerializeField] private TMP_Text textLevel;
     [SerializeField] private TMP_Text textRemain;
@@ -120,7 +119,7 @@ public class ViewInGame : View
 
     public void UpdateSquareRemain(int remain, int total)
     {
-        textRemain.text = $"Squares remain: {remain}/{total}";
+        textRemain.text = $"Monkey remain: {remain}/{total}";
     }
 
 
@@ -135,10 +134,21 @@ public class ViewInGame : View
     }
 
 
-    public void ResetData()
+    public void Reset()
     {
         textLevel.text = "00";
     }
+
+
+    public void OnClickButtonMenu()
+    {
+        Reset();
+        GameController.Instance.ResetGame();
+        GameManager.Instance.SetState(GameState.Menu);
+        SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
+    }
+
+
 
 
 }

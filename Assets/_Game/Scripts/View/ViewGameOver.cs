@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ViewGameOver : View
 {
 
-    // inspector
-    [SerializeField] private TMP_Text textHighScore;
-    [SerializeField] private Transform highScorePanel;
 
-    private bool _isDoneGameover;
+    [Space]
+    [SerializeField] private Text txtScore;
+    [SerializeField] private Text txtHighScore;
+    [SerializeField] private bool _isDoneGameover;
 
 
 
@@ -55,17 +56,32 @@ public class ViewGameOver : View
 
     private void ShowScore()
     {
-        int score = ScoreManager.Instance.score;
-        textHighScore.text = score.ToString();
+        var score = ScoreManager.Instance.score;
+        var playfab = PlayfabController.Instance;
 
-        try
-        {
-            // await CoreGame.CoreClient.Instance.ReportHightScore("archer_score", score);
-        }
-        catch
-        {
-        }
+        txtScore.text = $"{score.ToString()}";
+        txtHighScore.text = $"Best: {playfab.HighScore}";
+        playfab.CheckShowRecordScore(score);
     }
 
+
+    public void OnClickButtonReplay()
+    {
+        GameManager.Instance.ReplayGame();
+    }
+
+
+    public void OnClickButtonMenu()
+    {
+        GameController.Instance.ResetGame();
+        GameManager.Instance.SetState(GameState.Menu);
+        SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
+    }
+
+
+    public void OnClickButtonLeaderBoard()
+    {
+        PlayfabController.Instance.ShowLeaderBoard();
+    }
 
 }

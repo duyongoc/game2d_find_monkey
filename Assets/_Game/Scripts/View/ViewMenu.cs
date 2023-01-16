@@ -45,4 +45,11 @@ public class ViewMenu : View
 
 
 
+    public void OnClickButtonLeaderBoard()
+    {
+        PlayfabController.Instance.ShowLeaderBoard();
+    }
+
+
+
 }

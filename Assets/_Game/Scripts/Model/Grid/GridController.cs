@@ -93,8 +93,8 @@ public class GridController : MonoBehaviour
         _totalKey = key.Length;
         for (int i = 0; i < key.Length; i++)
         {
-            var index = key[i];
             // print("key " + index);
+            var index = key[i];
             if (index > tileList.Count - 1)
                 continue;
 

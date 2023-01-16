@@ -7,16 +7,16 @@ using Zenject;
 public class GameManager : Singleton<GameManager>
 {
 
-    // public
+    // [public]
     public static Action EVENT_RESET_INGAME;
     public GameState gameState = GameState.None;
 
 
-    // private
-    [Inject] private GameView _gameView;
+    // [private]
+    [Inject] private ViewManager _gameView;
 
 
-    // properties
+    // [properties]
     public bool IsInGameState => gameState == GameState.InGame;
 
 
@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     #region UNITY
     private void Start()
     {
-        InitGame();
+        Init();
     }
 
     // private void Update()
@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
 
 
 
-    private void InitGame()
+    private void Init()
     {
         SetState(gameState);
         // SoundMgr.PlayMusic(SoundMgr.MUSIC_MENU);
@@ -85,12 +85,15 @@ public class GameManager : Singleton<GameManager>
         switch (gameState)
         {
             // case GameState.Info: _gameView.SetStateView("Info"); break;
-            case GameState.Loading: _gameView.SetStateView("Loading"); break;
-            case GameState.Menu: _gameView.SetStateView("Menu"); break;
-            case GameState.InGame: _gameView.SetStateView("InGame"); break;
-            case GameState.GameOver: _gameView.SetStateView("GameOver"); break;
-            case GameState.Setting: _gameView.SetStateView("Setting"); break;
-            case GameState.None: _gameView.SetStateView("None"); break;
+            // case GameState.Loading: _gameView.SetStateView("Loading"); break;
+            // case GameState.Setting: _gameView.SetStateView("Setting"); break;
+            // case GameState.None: _gameView.SetStateView("None"); break;
+            case GameState.Menu:
+                _gameView.SetStateView("Menu"); break;
+            case GameState.InGame:
+                _gameView.SetStateView("InGame"); break;
+            case GameState.GameOver:
+                _gameView.SetStateView("GameOver"); break;
         }
     }
 
@@ -98,6 +101,7 @@ public class GameManager : Singleton<GameManager>
 
 
 }
+
 
 
 
@@ -127,3 +131,11 @@ public class GameManager : Singleton<GameManager>
 //
 //               佛祖保佑         永无BUG
 //
+// *
+// *   Buddha says :
+// *           Office room in office building , Programmers in the office ;
+// *           Programmers write programs , And program for drinks ;
+// *           People laugh at me for being crazy , I laugh at my life ;
+// *           No beautiful girls in the street , Which one belongs to the programmer ？
+// *
+
