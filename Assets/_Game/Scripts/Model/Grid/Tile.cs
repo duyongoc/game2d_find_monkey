@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     [Header("Setting")]
@@ -21,7 +21,6 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
 
     // [private]
-    private GameController _gameScene;
     private bool _hasKey = false;
     private bool _isOpen = false;
 
@@ -43,13 +42,13 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     #endregion
 
 
-    public void RefeshTile()
+
+    public void Load()
     {
         _isOpen = false;
-        _gameScene = GameController.Instance;
-        imgLock.SetActive(true);
-        imgTile.color = colorHide;
+        ShowLocked(true);
         transform.DOKill();
+        imgTile.color = colorHide;
     }
 
 
@@ -61,24 +60,31 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void ShowTile()
     {
-        PlayAnimationFlip();
-        // imgTile.color = colorWhite;
-        imgLock.SetActive(false);
+        ShowLocked(false);
+        PlayEffectRotationY();
     }
 
 
     public void HideTile()
     {
-        PlayAnimationFlip();
-        // imgTile.color = colorHide;
-        imgLock.SetActive(true);
+        ShowLocked(true);
+        PlayEffectRotationY();
     }
 
 
-    private void OnClickTheTile()
+    public void HideByRotateY()
+    {
+        ShowLocked(true);
+        PlayEffectRotationY(180);
+    }
+
+
+    private void OnClickedTheTile()
     {
         if (_isOpen)
+        {
             return;
+        }
 
         switch (_hasKey)
         {
@@ -87,91 +93,74 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
 
         _isOpen = true;
-        PlayAnimationFlip();
+        PlayEffectRotationY(180);
         GameController.Instance.CheckGridResult();
     }
 
 
     private void PickWrong()
     {
-        var origin = transform.localScale;
-        imgTile.color = colorBlack;
-
+        var originScale = transform.localScale;
         transform.DOShakeScale(0.5f, Vector3.one * 0.25f, 20, 0)
-            .OnComplete(() => { transform.localScale = origin; });
+            .OnComplete(() => { transform.localScale = originScale; });
 
         GameController.Instance.PickWrong();
         SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_WRONG);
-
-        // var origin = transform.localRotation;
-        // transform.DOShakeRotation(0.5f, new Vector3(0f, 0f, 90f), 20, 90)
-        //     .OnComplete(() => { transform.localRotation = origin; });
     }
 
 
     private void PickRight()
     {
         _hasKey = false;
-        imgLock.SetActive(false);
-        // imgTile.color = colorWhite;
+        ShowLocked(false);
         SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_RIGHT);
     }
 
 
-    // public void OnPointerClick(PointerEventData pointerEventData)
-    // {
-    //     Debug.Log(name + " Game Object Clicked!");
-    // }
-
-
-    public void OnPointerDown(PointerEventData eventData)
+    private void ShowLocked(bool value)
     {
-        // Debug.Log(this.gameObject.name + " OnPointerDown.");
-        if (_gameScene.BlockTile)
-            return;
-
-        OnClickTheTile();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        // Debug.Log(this.gameObject.name + " OnPointerUp.");
+        imgLock.SetActive(value);
     }
 
 
-    private void PlayAnimationFlip()
+    private void PlayEffectRotationY(float value = 180)
     {
-        transform.DORotate(new Vector3(0, 0, -360), 0.5f)
+        var scale = transform.transform.transform.localScale;
+        var scaleX = scale.x * -1;
+
+        transform.DORotate(new Vector3(0, value, 0), .5f, RotateMode.LocalAxisAdd)
             .OnComplete(() =>
             {
                 transform.localRotation = Quaternion.identity;
+                transform.transform.localScale = new Vector3(scaleX, 1, 1);
             });
+    }
+
+
+    private void PlayEffectRotationZ(float value = 360)
+    {
+        transform.DORotate(new Vector3(0, 0, value), .5f, RotateMode.LocalAxisAdd)
+            .OnComplete(() => { transform.localRotation = Quaternion.identity; });
     }
 
 
     public void PlayAnimationWin()
     {
-        // imgTile.DOFade(1, 0);
-        // transform.DOScale(Vector3.zero, timeEffect);
-
-        Sequence effectSq = DOTween.Sequence();
-        // effectSq.Append(imgTile.DOColor(Color.yellow, timeEffect))
-        effectSq.Append(imgTile.DOFade(0, timeEffect))
-           .OnComplete(() =>
-           {
-               imgTile.DOKill();
-               transform.DOKill();
-           });
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(imgTile.DOFade(0, timeEffect))
+            .OnComplete(() =>
+            {
+                imgTile.DOKill();
+                transform.DOKill();
+            });
     }
+
 
     public void PlayAnimationClose()
     {
-        // imgTile.DOFade(1, 0);
         transform.DOScale(Vector3.zero, timeEffect);
-
-        Sequence effectSq = DOTween.Sequence();
-        // effectSq.Append(imgTile.DOColor(Color.yellow, timeEffect))
-        effectSq.Append(imgTile.DOFade(0, timeEffect))
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(imgTile.DOFade(0, timeEffect))
            .OnComplete(() =>
             {
                 imgTile.DOKill();
@@ -180,14 +169,19 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        // print("enter " + gameObject.name);
+        if (GameController.Instance.BlockTile)
+            return;
+
+        OnClickedTheTile();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+
+    public void OnPointerUp(PointerEventData eventData)
     {
-        // print("exit " + gameObject.name);
+        // Debug.Log(this.gameObject.name + " OnPointerUp.");
     }
+
 
 }

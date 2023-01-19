@@ -6,31 +6,26 @@ using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
+
 public class GameController : Singleton<GameController>
 {
 
+    [Header("[Setting]")]
+    [SerializeField] private LevelDesign levelDesign;
+    [SerializeField] private GridController gridController;
+    [SerializeField] private int canWrong = 5;
 
-    [Header("Param")]
-    public LevelDesign levelDesign;
-    public GridController gridController;
-    public int canWrong = 5;
-
-    [Header("View infomation")]
-    // public ViewInfo viewInfo;
-
-
-    // DI
+    // [DI]
     [Inject] ViewInGame viewInGame;
 
-
-    // private 
+    // [private]
     private TurnData _currentTurn;
     private int _currentIndex = 0;
     private int _currentWrong = 0;
     private bool _blockTile = false;
 
 
-    // properties
+    // [properties]
     public bool BlockTile => _blockTile;
 
 
@@ -88,12 +83,11 @@ public class GameController : Singleton<GameController>
 
     public void StartTurn()
     {
-        gridController.ShowListTileHasKey();
+        gridController.ShowTiles();
         DG.Tweening.DOVirtual.DelayedCall(1.5f, () =>
         {
             _blockTile = false;
-            gridController.HideListTile();
-
+            gridController.HideTilesByRotateY();
             viewInGame.StartCountTime(_currentTurn.timeFinish);
         });
     }
@@ -101,8 +95,8 @@ public class GameController : Singleton<GameController>
 
     private void ShowSquareRemain()
     {
-        var remain = gridController.GetTileRemain();
-        var total = gridController.GetTileTotal();
+        var remain = gridController.GetTilesRemain();
+        var total = gridController.GetTilesTotal();
         viewInGame.UpdateSquareRemain(remain, total);
     }
 
@@ -110,16 +104,10 @@ public class GameController : Singleton<GameController>
     public void CheckGridResult()
     {
         ShowSquareRemain();
-        var result = gridController.CheckGridResult();
-        switch (result)
+        switch (gridController.CheckResult())
         {
-            case false:
-                //PickWrong(); 
-                break;
-
-            case true:
-                ShowWin();
-                break;
+            case false: break;
+            case true: ShowWin(); break;
         }
     }
 
@@ -139,6 +127,7 @@ public class GameController : Singleton<GameController>
         ShakeCameraWin();
         gridController.PlayAnimationWin();
 
+        print("Level pass");
         string content = $"Level passed: \n {_currentIndex}";
         DOVirtual.DelayedCall(0.75f, () =>
         {
@@ -162,10 +151,8 @@ public class GameController : Singleton<GameController>
 
     public void PickWrong()
     {
-        // update wrong text on UI
-        print("pick wrong");
+        // update wrong text on ui
         viewInGame.UpdateWrongText(--_currentWrong);
-
         if (_currentWrong <= 0)
         {
             ShowLose($"Wrong!\n Do you wanna play again? ");
@@ -180,14 +167,14 @@ public class GameController : Singleton<GameController>
 
     private void ResetTurn()
     {
-        _currentWrong = canWrong;
         _blockTile = false;
+        _currentWrong = canWrong;
         viewInGame.UpdateWrongText(_currentWrong);
 
         transform.DOKill();
-        gridController.HideListTile();
+        gridController.HideTilesByRotateY();
 
-        // NextTurn();
+        // check for next turn
         DOVirtual.DelayedCall(1f, () => { NextTurn(); });
     }
 
@@ -197,11 +184,11 @@ public class GameController : Singleton<GameController>
         _currentIndex = 0;
         _currentWrong = canWrong;
         _currentTurn = null;
-        viewInGame.UpdateLevel(_currentIndex);
-        viewInGame.UpdateWrongText(_currentWrong);
 
         transform.DOKill();
-        gridController.ResetData();
+        gridController.Reset();
+        viewInGame.UpdateLevel(_currentIndex);
+        viewInGame.UpdateWrongText(_currentWrong);
 
         GameManager.EVENT_RESET_INGAME?.Invoke();
         DOVirtual.DelayedCall(1f, () => { NextTurn(); });

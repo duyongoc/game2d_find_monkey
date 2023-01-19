@@ -6,29 +6,20 @@ using Zenject;
 public class ViewManager : MonoBehaviour
 {
 
-    // DI
-    // [Inject] private ViewLoading _viewLoading;
-    // [Inject] private ViewInfo _viewInfo;
+    // [DI]
     [Inject] private ViewMenu _viewMenu;
     [Inject] private ViewInGame _viewInGame;
     [Inject] private ViewGameOver _viewGameOver;
-    // [Inject] private ViewSetting _viewSetting;
-    // [Inject] private ViewNone _viewNone;
 
-
-    // private
+    // [private]
     private View _stateView;
-
-
-    // properties
-    // public ViewInfo GetViewInfo => _viewInfo;
 
 
 
     #region UNITY
     private void Start()
     {
-        // Init();
+        Init();
     }
 
     private void Update()
@@ -52,12 +43,9 @@ public class ViewManager : MonoBehaviour
     {
         switch (viewName)
         {
-            // case "Info": SetState(_viewInfo); break;
-            // case "Loading": SetState(_viewLoading); break;
             case "Menu": SetState(_viewMenu); break;
             case "InGame": SetState(_viewInGame); break;
             case "GameOver": SetState(_viewGameOver); break;
-            // case "Setting": SetState(_viewSetting); break;
         }
     }
 
@@ -77,13 +65,9 @@ public class ViewManager : MonoBehaviour
 
     public void SetActiveView(string nameScene)
     {
-        // _viewInfo.gameObject.SetActive(_viewInfo.name.Contains(nameScene));
-        // _viewLoading.gameObject.SetActive(_viewLoading.name.Contains(nameScene));
         _viewMenu.gameObject.SetActive(_viewMenu.name.Contains(nameScene));
         _viewInGame.gameObject.SetActive(_viewInGame.name.Contains(nameScene));
         _viewGameOver.gameObject.SetActive(_viewGameOver.name.Contains(nameScene));
-        // _viewSetting.gameObject.SetActive(_viewSetting.name.Contains(nameScene));
-        // _viewNone.gameObject.SetActive(_viewNone.name.Contains(nameScene));
     }
 
 

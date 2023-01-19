@@ -6,11 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class TurnData
 {
-    [Space(10)]
+    [Space]
     public int matrixSize;
     public float timeFinish;
 
-    [Space(10)]
+    [Space]
     public bool random;
     public string patternString;
 }
@@ -20,7 +20,7 @@ public class TurnData
 public class SettingSO : ScriptableObject
 {
 
-    [Space(10)]
+    [Space]
     public List<TurnData> turnEasy;
     public List<TurnData> turnMedium;
     public List<TurnData> turnHard;

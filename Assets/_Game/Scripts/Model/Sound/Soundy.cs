@@ -5,9 +5,9 @@ using UnityEngine;
 public class Soundy : MonoBehaviour
 {
 
-    [SerializeField] 
-    private AudioSource audioSource;
-    // private AudioClip audioClip;
+    [Space]
+    [SerializeField] private AudioSource audioSource;
+
 
 
     #region UNITY
@@ -19,6 +19,7 @@ public class Soundy : MonoBehaviour
     // {
     // }
     #endregion
+
 
 
     public void Play(AudioClip audi)

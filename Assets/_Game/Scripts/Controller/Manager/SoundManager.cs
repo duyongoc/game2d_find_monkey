@@ -15,19 +15,19 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private Transform sfxAudio;
 
 
-    // music
+    // [private]
+    private static AudioSource audioMusic;
+    private static AudioSource audioSFX;
+
+    // [music]
     public static AudioClip MUSIC_BACKGROUND;
 
-    // sfx
+    // [SFX]
     public static AudioClip SFX_PICK_RIGHT;
     public static AudioClip SFX_PICK_WRONG;
     public static AudioClip SFX_TIMECOUNT;
     public static AudioClip SFX_GAMEOVER;
 
-
-    // private
-    private static AudioSource audioMusic;
-    private static AudioSource audioSFX;
 
 
 
@@ -65,6 +65,13 @@ public class SoundManager : Singleton<SoundManager>
         SFX_GAMEOVER = config.SFX_GAMEOVER;
     }
 
+    
+
+    public void PlaySFX(AudioClip audi)
+    {
+        var sound = Instantiate(soundyPrefab, audioSFX.transform);
+        sound.Play(audi);
+    }
 
 
     public static void PlayMusic(AudioClip audi, bool loop = true)
@@ -78,13 +85,6 @@ public class SoundManager : Singleton<SoundManager>
     public static void StopMusic()
     {
         audioMusic.Stop();
-    }
-
-
-    public void PlaySFX(AudioClip audi)
-    {
-        var sound = Instantiate(soundyPrefab, audioSFX.transform);
-        sound.Play(audi);
     }
 
 

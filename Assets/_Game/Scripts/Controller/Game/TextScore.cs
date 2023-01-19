@@ -7,10 +7,11 @@ using UnityEngine;
 public class TextScore : MonoBehaviour
 {
 
-    // inspector
+    [Space]
     [SerializeField] private TMP_Text textScore;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float destroyTime;
+
 
 
     #region UNITY
@@ -23,6 +24,7 @@ public class TextScore : MonoBehaviour
         MoveText();
     }
     #endregion
+
 
 
     public void Init(int score, Color color)

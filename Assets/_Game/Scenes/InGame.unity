@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridObject: {fileID: 17185121}
   tilePrefab: {fileID: 2794690484799281230, guid: 355ef94cdf50347eeb19d5864b16d6f6, type: 3}
-  tileList: []
+  cacheTiles: []
 --- !u!1 &447018879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1596,7 @@ GameObject:
   - component: {fileID: 852733654}
   - component: {fileID: 852733655}
   m_Layer: 5
-  m_Name: time_silder
+  m_Name: TimeSilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,29 +7,28 @@ using UnityEngine.UI;
 public class GridController : MonoBehaviour
 {
 
-    // inspector
-    [Space(10)]
+
+    [Space]
     [SerializeField] private GridLayoutGroup gridObject;
     [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private List<Tile> cacheTiles = new List<Tile>();
 
-
-    //
-    public List<Tile> tileList = new List<Tile>();
+    // [private]
     private int _totalKey;
     private int _size;
 
 
 
     #region UNITY
-    private void Start()
-    {
-
-    }
+    // private void Start()
+    // {
+    // }
 
     // private void Update()
     // {
     // }
     #endregion
+
 
 
 
@@ -43,9 +42,8 @@ public class GridController : MonoBehaviour
 
     private void CreateMatrixWithSize()
     {
-        var sizeWidth = gridObject.GetComponent<RectTransform>().sizeDelta.x;
-
         // caculate the tile width, height with size
+        var sizeWidth = gridObject.GetComponent<RectTransform>().sizeDelta.x;
         var tileSize = sizeWidth / _size;
         var padding = tileSize / (_size * _size);
 
@@ -65,25 +63,24 @@ public class GridController : MonoBehaviour
             {
                 var tile = Instantiate(tilePrefab, gridObject.transform);
                 tile.gameObject.name = $"tile_{index++}";
-
-                tileList.Add(tile.GetComponent<Tile>());
+                cacheTiles.Add(tile.GetComponent<Tile>());
             }
         }
 
-        RefeshListTile();
+        LoadTiles();
     }
 
 
-    public void RefeshListTile()
+    public void LoadTiles()
     {
-        tileList.ForEach(x => x.RefeshTile());
+        cacheTiles.ForEach(x => x.Load());
     }
 
 
 
-    public bool CheckGridResult()
+    public bool CheckResult()
     {
-        var tileKey = tileList.Any(x => x.HasKey);
+        var tileKey = cacheTiles.Any(x => x.HasKey);
         return !tileKey;
     }
 
@@ -93,49 +90,45 @@ public class GridController : MonoBehaviour
         _totalKey = key.Length;
         for (int i = 0; i < key.Length; i++)
         {
-            // print("key " + index);
             var index = key[i];
-            if (index > tileList.Count - 1)
+            if (index > cacheTiles.Count - 1)
                 continue;
 
-            tileList[index].SetKey(true);
+            cacheTiles[index].SetKey(true);
         }
     }
 
 
-    public void ShowListTileHasKey()
+    public void ShowTiles()
     {
-        tileList.ForEach(x =>
-        {
-            if (x.HasKey) x.ShowTile();
-        });
+        cacheTiles.ForEach(x => { if (x.HasKey) x.ShowTile(); });
     }
 
 
-    public void HideListTile()
+    public void HideTilesByRotateY()
     {
-        tileList.ForEach(x => x.HideTile());
+        cacheTiles.ForEach(x => x.HideByRotateY());
     }
 
 
     public void PlayAnimationWin()
     {
-        tileList.ForEach(x => x.PlayAnimationWin());
+        cacheTiles.ForEach(x => x.PlayAnimationWin());
     }
 
     public void PlayAnimationClose()
     {
-        tileList.ForEach(x => x.PlayAnimationClose());
+        cacheTiles.ForEach(x => x.PlayAnimationClose());
     }
 
 
-    public int GetTileRemain()
+    public int GetTilesRemain()
     {
-        return tileList.Where(x => x.HasKey).Count();
+        return cacheTiles.Where(x => x.HasKey).Count();
     }
 
 
-    public int GetTileTotal()
+    public int GetTilesTotal()
     {
         return _totalKey;
     }
@@ -143,12 +136,12 @@ public class GridController : MonoBehaviour
 
     private void ClearListTiles()
     {
-        tileList.ForEach(x => { if (x != null) Destroy(x.gameObject); });
-        tileList.Clear();
+        cacheTiles.ForEach(x => { if (x != null) Destroy(x.gameObject); });
+        cacheTiles.Clear();
     }
 
 
-    public void ResetData()
+    public void Reset()
     {
         PlayAnimationClose();
     }

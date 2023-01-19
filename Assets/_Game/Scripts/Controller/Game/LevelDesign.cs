@@ -7,7 +7,7 @@ public class LevelDesign : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private SettingSO setting;
-    // [SerializeField] private int level = 5;
+
 
     public TurnData GetTurn(int turn)
     {

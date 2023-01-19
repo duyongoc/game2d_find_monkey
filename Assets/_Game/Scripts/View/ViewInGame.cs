@@ -17,7 +17,7 @@ public class ViewInGame : View
     [SerializeField] private TMP_Text textWrong;
     [SerializeField] private TMP_Text txtInfo;
 
-    [Space(10)]
+    [Header("[Slider timer]")]
     [SerializeField] private Slider sliderTimer;
     [SerializeField] private GameObject objInfo;
 
@@ -45,12 +45,10 @@ public class ViewInGame : View
     {
         base.StartState();
     }
-
     public override void UpdateState()
     {
         base.UpdateState();
     }
-
     public override void EndState()
     {
         base.EndState();
@@ -64,7 +62,7 @@ public class ViewInGame : View
         _cancelCounting = false;
         CountingTime(value, () =>
         {
-            GameController.Instance.ShowLose($"Out of time!\n Do you wanna play again? ");
+            GameController.Instance.ShowLose($"Out of time! \nDo you wanna play again?");
         });
     }
 
@@ -78,30 +76,27 @@ public class ViewInGame : View
 
     public async void CountingTime(float value, Action callback)
     {
-        float currentTimer = value;
+        var playsound = false;
+        var currentTimer = value;
         sliderTimer.maxValue = value;
         sliderTimer.value = value;
-        bool playsound = false;
 
+        // counting timer
         while (currentTimer >= 0 && !_cancelCounting)
         {
             currentTimer -= .01f;
             sliderTimer.value = currentTimer;
-
             if (currentTimer <= 2 && !playsound)
             {
-                SoundManager.PlaySFXOneShot(SoundManager.SFX_TIMECOUNT);
                 playsound = true;
+                SoundManager.PlaySFXOneShot(SoundManager.SFX_TIMECOUNT);
             }
 
             await UniTask.Delay(System.TimeSpan.FromSeconds(0.01f));
         }
 
-        // out of time - lose game 
-        if (currentTimer < 0)
-        {
-            callback?.Invoke();
-        }
+        // out of time => lose game 
+        if (currentTimer < 0) { callback?.Invoke(); }
     }
 
 
@@ -150,12 +145,6 @@ public class ViewInGame : View
     }
 
 
-    public void Reset()
-    {
-        textLevel.text = "00";
-    }
-
-
     public void OnClickButtonMenu()
     {
         Reset();
@@ -163,6 +152,13 @@ public class ViewInGame : View
         GameManager.Instance.SetState(GameState.Menu);
         SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
     }
+
+
+    public void Reset()
+    {
+        textLevel.text = "00";
+    }
+
 
 
 

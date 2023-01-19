@@ -7,10 +7,9 @@ using Zenject;
 public class GameManager : Singleton<GameManager>
 {
 
-    // [public]
+    // [Event]
     public static Action EVENT_RESET_INGAME;
-    public GameState gameState = GameState.None;
-
+    public GameState gameState = GameState.Menu;
 
     // [private]
     [Inject] private ViewManager _gameView;
@@ -43,11 +42,9 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayGameWithInfo()
     {
-        string info = "Lets test your memory. \nGet the white blocks as much as possible\nBe aware! The time is counting down.";
-
         SetState(GameState.InGame);
         GameController.Instance.InitScene();
-        GameController.Instance.ShowInfo(info, () =>
+        GameController.Instance.ShowInfo(Define.TEXT_INTRO, () =>
         {
             PlayGame();
             GameController.Instance.StartTurn();
@@ -80,13 +77,8 @@ public class GameManager : Singleton<GameManager>
     public void SetState(GameState newState)
     {
         gameState = newState;
-
         switch (gameState)
         {
-            // case GameState.Info: _gameView.SetStateView("Info"); break;
-            // case GameState.Loading: _gameView.SetStateView("Loading"); break;
-            // case GameState.Setting: _gameView.SetStateView("Setting"); break;
-            // case GameState.None: _gameView.SetStateView("None"); break;
             case GameState.Menu:
                 _gameView.SetStateView("Menu"); break;
             case GameState.InGame:
@@ -95,8 +87,6 @@ public class GameManager : Singleton<GameManager>
                 _gameView.SetStateView("GameOver"); break;
         }
     }
-
-
 
 
 }
