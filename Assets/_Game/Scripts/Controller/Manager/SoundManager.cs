@@ -32,8 +32,9 @@ public class SoundManager : Singleton<SoundManager>
 
 
     #region UNITY
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
         CacheComponent();
         CacheDefine();
     }

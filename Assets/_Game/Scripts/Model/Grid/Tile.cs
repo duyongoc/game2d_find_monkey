@@ -15,14 +15,18 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public Color colorBlack;
     public float timeEffect;
 
+    [Space]
+    [SerializeField] private GameObject imgMonkey;
+    [SerializeField] private GameObject imgLock;
 
-    // private
+
+    // [private]
     private GameController _gameScene;
     private bool _hasKey = false;
     private bool _isOpen = false;
 
 
-    // properties
+    // [properties]
     public bool HasKey => _hasKey;
 
 
@@ -43,6 +47,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         _isOpen = false;
         _gameScene = GameController.Instance;
+        imgLock.SetActive(true);
         imgTile.color = colorHide;
         transform.DOKill();
     }
@@ -57,14 +62,16 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public void ShowTile()
     {
         PlayAnimationFlip();
-        imgTile.color = colorWhite;
+        // imgTile.color = colorWhite;
+        imgLock.SetActive(false);
     }
 
 
     public void HideTile()
     {
         PlayAnimationFlip();
-        imgTile.color = colorHide;
+        // imgTile.color = colorHide;
+        imgLock.SetActive(true);
     }
 
 
@@ -105,7 +112,8 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private void PickRight()
     {
         _hasKey = false;
-        imgTile.color = colorWhite;
+        imgLock.SetActive(false);
+        // imgTile.color = colorWhite;
         SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_RIGHT);
     }
 
@@ -133,7 +141,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     private void PlayAnimationFlip()
     {
-        transform.DORotate(new Vector3(0, 180, 0), 0.5f)
+        transform.DORotate(new Vector3(0, 0, -360), 0.5f)
             .OnComplete(() =>
             {
                 transform.localRotation = Quaternion.identity;
@@ -165,10 +173,10 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         // effectSq.Append(imgTile.DOColor(Color.yellow, timeEffect))
         effectSq.Append(imgTile.DOFade(0, timeEffect))
            .OnComplete(() =>
-           {
-               imgTile.DOKill();
-               transform.DOKill();
-           });
+            {
+                imgTile.DOKill();
+                transform.DOKill();
+            });
     }
 
 

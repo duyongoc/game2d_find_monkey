@@ -5780,7 +5780,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1400141964105814084
 RectTransform:
@@ -15841,7 +15841,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5603838387518068336}
   - component: {fileID: 5603838387518068340}
-  - component: {fileID: 5603838387518068343}
   - component: {fileID: 5603838387518068337}
   - component: {fileID: 5603838387518068341}
   m_Layer: 5
@@ -15877,36 +15876,6 @@ MonoBehaviour:
   txtInfo: {fileID: 1464596185}
   sliderTimer: {fileID: 852733655}
   objInfo: {fileID: 2109327441}
---- !u!114 &5603838387518068343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5603838387518068339}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.5596298, b: 0.5596298, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5603838387574984533
 GameObject:
   m_ObjectHideFlags: 0

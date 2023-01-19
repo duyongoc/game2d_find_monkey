@@ -37,14 +37,13 @@ public class GameManager : Singleton<GameManager>
     private void Init()
     {
         SetState(gameState);
-        // SoundMgr.PlayMusic(SoundMgr.MUSIC_MENU);
+        SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
     }
 
 
     public void PlayGameWithInfo()
     {
-        string info = "Lets test your memory. \n Get the white blocks as much as possible";
-        info += "\n\nBe aware! The time is counting down.";
+        string info = "Lets test your memory. \nGet the white blocks as much as possible\nBe aware! The time is counting down.";
 
         SetState(GameState.InGame);
         GameController.Instance.InitScene();
