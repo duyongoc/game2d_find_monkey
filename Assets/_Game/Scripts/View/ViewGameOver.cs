@@ -38,11 +38,6 @@ public class ViewGameOver : View
     public override void UpdateState()
     {
         base.UpdateState();
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            GameManager.Instance.ReplayGame();
-        }
     }
 
     public override void EndState()
@@ -68,6 +63,7 @@ public class ViewGameOver : View
     public void OnClickButtonReplay()
     {
         GameManager.Instance.ReplayGame();
+        // GameController.Instance.ResetGame();
     }
 
 

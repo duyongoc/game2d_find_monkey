@@ -62,7 +62,9 @@ public class ViewInGame : View
         _cancelCounting = false;
         CountingTime(value, () =>
         {
-            GameController.Instance.ShowLose($"Out of time! \nDo you wanna play again?");
+            CancelCounting();
+            GameManager.Instance.GameOver();
+            // GameController.Instance.ShowLose($"Out of time! \nDo you wanna play again?");
         });
     }
 
