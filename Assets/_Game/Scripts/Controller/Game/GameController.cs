@@ -10,6 +10,7 @@ using Zenject;
 public class GameController : Singleton<GameController>
 {
 
+
     [Header("[Setting]")]
     [SerializeField] private LevelDesign levelDesign;
     [SerializeField] private GridController gridController;
@@ -19,10 +20,10 @@ public class GameController : Singleton<GameController>
     [Inject] ViewInGame viewInGame;
 
     // [private]
-    private TurnData _currentTurn;
     private int _currentIndex = 0;
     private int _currentWrong = 0;
     private bool _blockTile = false;
+    private TurnData _currentTurn;
 
 
     // [properties]
@@ -157,12 +158,7 @@ public class GameController : Singleton<GameController>
         {
             ShowLose($"Wrong!\n Do you wanna play again? ");
         }
-
-        // shaking camera
-        // gridController.transform.DOShakeScale(1f, new Vector3(1.75f, 1.75f, 0), 10, 0)
-        //     .OnComplete(() => { gridController.transform.localRotation = Quaternion.identity; });
     }
-
 
 
     private void ResetTurn()

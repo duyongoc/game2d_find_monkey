@@ -6,11 +6,11 @@ public class SoundManager : Singleton<SoundManager>
 {
 
 
-    [Header("Setting")]
+    [Header("[Setting]")]
     [SerializeField] private SoundConfigSO config;
     [SerializeField] private Soundy soundyPrefab;
 
-    [Header("Audio")]
+    [Header("[Audio]")]
     [SerializeField] private Transform musicAudio;
     [SerializeField] private Transform sfxAudio;
 

@@ -17,7 +17,7 @@ public class ViewInGame : View
     [SerializeField] private TMP_Text textWrong;
     [SerializeField] private TMP_Text txtInfo;
 
-    [Header("[Slider timer]")]
+    [Header("[Timer]")]
     [SerializeField] private Slider sliderTimer;
     [SerializeField] private GameObject objInfo;
 

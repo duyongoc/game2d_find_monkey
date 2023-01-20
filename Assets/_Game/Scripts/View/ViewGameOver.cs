@@ -63,7 +63,6 @@ public class ViewGameOver : View
     public void OnClickButtonReplay()
     {
         GameManager.Instance.ReplayGame();
-        // GameController.Instance.ResetGame();
     }
 
 

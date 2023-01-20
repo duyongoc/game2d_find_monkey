@@ -166,6 +166,13 @@ public class PlayfabController : SingletonEvent<PlayfabController>
 
     private void ShowTopPlayers(List<PlayerLeaderboardEntry> board)
     {
+        // show no result
+        if (board.Count <= 0)
+        {
+            uiLeaderboard.ShowNoResultFound(true);
+        }
+
+        // create item on  leader board 
         for (int index = 0; index <= board.Count - 1; index++)
         {
             uiLeaderboard.CreateItemPlayer(board[index], index);
