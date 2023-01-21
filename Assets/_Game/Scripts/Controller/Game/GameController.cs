@@ -79,6 +79,7 @@ public class GameController : Singleton<GameController>
 
         _currentIndex++;
         viewInGame.UpdateLevel(_currentIndex);
+        ScoreManager.Instance.UpdateScore(_currentIndex);
     }
 
 
@@ -128,7 +129,7 @@ public class GameController : Singleton<GameController>
         ShakeCameraWin();
         gridController.PlayAnimationWin();
 
-        print("Level pass");
+        // print("Level pass");
         string content = $"Level passed: \n {_currentIndex}";
         DOVirtual.DelayedCall(0.75f, () =>
         {
@@ -156,7 +157,9 @@ public class GameController : Singleton<GameController>
         viewInGame.UpdateWrongText(--_currentWrong);
         if (_currentWrong <= 0)
         {
-            ShowLose($"Wrong!\n Do you wanna play again? ");
+            // ShowLose($"Wrong!\n Do you wanna play again? ");
+            // CancelCounting();
+            GameManager.Instance.GameOver();
         }
     }
 
