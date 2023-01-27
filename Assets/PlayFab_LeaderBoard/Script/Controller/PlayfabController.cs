@@ -96,7 +96,7 @@ public class PlayfabController : SingletonEvent<PlayfabController>
 
     public void CheckShowRecordScore(int score)
     {
-        print($"minimumScore: {highScore} | score: {score}");
+        print($"minimumScore: score: {score} | {highScore}");
         if (highScore >= score)
             return;
 

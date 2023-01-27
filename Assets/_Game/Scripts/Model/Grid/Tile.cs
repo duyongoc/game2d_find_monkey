@@ -9,11 +9,11 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     [Header("Setting")]
-    public Image imgTile;
-    public Color colorHide;
-    public Color colorWhite;
-    public Color colorBlack;
-    public float timeEffect;
+    [SerializeField] private Image imgTile;
+    [SerializeField] private Color colorHide;
+    [SerializeField] private Color colorWhite;
+    [SerializeField] private Color colorBlack;
+    [SerializeField] private float timeEffect;
 
     [Space]
     [SerializeField] private GameObject imgMonkey;
@@ -82,19 +82,25 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void OnClickedTheTile()
     {
         if (_isOpen)
-        {
             return;
-        }
 
         switch (_hasKey)
         {
-            case false: PickWrong(); break;
             case true: PickRight(); break;
+            case false: PickWrong(); break;
         }
 
-        _isOpen = true;
         PlayEffectRotationY(180);
         GameController.Instance.CheckGridResult();
+    }
+
+
+    private void PickRight()
+    {
+        _isOpen = true;
+        _hasKey = false;
+        ShowLocked(false);
+        SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_RIGHT);
     }
 
 
@@ -106,14 +112,6 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         GameController.Instance.PickWrong();
         SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_WRONG);
-    }
-
-
-    private void PickRight()
-    {
-        _hasKey = false;
-        ShowLocked(false);
-        SoundManager.Instance.PlaySFX(SoundManager.SFX_PICK_RIGHT);
     }
 
 

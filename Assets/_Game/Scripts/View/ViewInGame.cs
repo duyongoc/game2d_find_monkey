@@ -23,7 +23,9 @@ public class ViewInGame : View
 
 
     // [private]
+    private bool _playsound = false;
     private bool _cancelCounting = false;
+    private float _currentTimer = -1;
     private System.Action callbackContinue;
 
 
@@ -60,12 +62,7 @@ public class ViewInGame : View
     public void StartCountTime(float value)
     {
         _cancelCounting = false;
-        CountingTime(value, () =>
-        {
-            CancelCounting();
-            GameManager.Instance.GameOver();
-            // GameController.Instance.ShowLose($"Out of time! \nDo you wanna play again?");
-        });
+        CountingTime(value);
     }
 
 
@@ -76,21 +73,21 @@ public class ViewInGame : View
     }
 
 
-    public async void CountingTime(float value, Action callback)
+    public async void CountingTime(float value)
     {
-        var playsound = false;
-        var currentTimer = value;
+        _playsound = false;
+        _currentTimer = value;
         sliderTimer.maxValue = value;
         sliderTimer.value = value;
 
         // counting timer
-        while (currentTimer >= 0 && !_cancelCounting)
+        while (_currentTimer >= 0 && !_cancelCounting)
         {
-            currentTimer -= .01f;
-            sliderTimer.value = currentTimer;
-            if (currentTimer <= 2 && !playsound)
+            _currentTimer -= .01f;
+            sliderTimer.value = _currentTimer;
+            if (_currentTimer <= 2 && !_playsound)
             {
-                playsound = true;
+                _playsound = true;
                 SoundManager.PlaySFXOneShot(SoundManager.SFX_TIMECOUNT);
             }
 
@@ -98,7 +95,11 @@ public class ViewInGame : View
         }
 
         // out of time => lose game 
-        if (currentTimer < 0) { callback?.Invoke(); }
+        if (_currentTimer < 0)
+        {
+            CancelCounting();
+            GameManager.Instance.GameOver();
+        }
     }
 
 
@@ -149,8 +150,7 @@ public class ViewInGame : View
 
     public void OnClickButtonMenu()
     {
-        Reset();
-        GameController.Instance.ResetGame();
+        GameController.Instance.Reset();
         GameManager.Instance.SetState(GameState.Menu);
         SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
     }
@@ -158,9 +158,12 @@ public class ViewInGame : View
 
     public void Reset()
     {
-        textLevel.text = "00";
-    }
+        sliderTimer.value = 0;
+        sliderTimer.maxValue = 0;
 
+        CancelCounting();
+        UpdateLevel(0);
+    }
 
 
 

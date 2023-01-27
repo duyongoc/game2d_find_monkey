@@ -15,12 +15,12 @@ public class ScoreManager : Singleton<ScoreManager>
     #region UNITY
     private void OnEnable()
     {
-        GameManager.EVENT_RESET_INGAME += ResetData;
+        this.RegisterListener(EventID.OnEvent_GameOver, Reset);
     }
 
     private void OnDisable()
     {
-        GameManager.EVENT_RESET_INGAME -= ResetData;
+        this.RemoveListener(EventID.OnEvent_GameOver, Reset);
     }
     #endregion
 
@@ -38,7 +38,7 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
 
-    public void ResetData()
+    public void Reset(object param)
     {
         score = 0;
     }

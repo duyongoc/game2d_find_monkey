@@ -38,16 +38,16 @@ public class GameController : Singleton<GameController>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            NextTurn();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     NextTurn();
+        // }
     }
     #endregion
 
 
 
-    public void InitScene()
+    public void Load()
     {
         SetupTurn();
         _currentWrong = canWrong;
@@ -57,9 +57,14 @@ public class GameController : Singleton<GameController>
 
     public void NextTurn()
     {
-        //prepare for the turn
         SetupTurn();
         StartTurn();
+    }
+
+
+    public void StartDelayNextTurn()
+    {
+        DOVirtual.DelayedCall(1f, () => { NextTurn(); });
     }
 
 
@@ -117,7 +122,11 @@ public class GameController : Singleton<GameController>
     public void ShowLose(string content)
     {
         viewInGame.CancelCounting();
-        viewInGame.ShowInfo(content, () => { ResetGame(); });
+        viewInGame.ShowInfo(content, () =>
+        {
+            Reset();
+            StartDelayNextTurn();
+        });
     }
 
 
@@ -157,8 +166,7 @@ public class GameController : Singleton<GameController>
         viewInGame.UpdateWrongText(--_currentWrong);
         if (_currentWrong <= 0)
         {
-            // ShowLose($"Wrong!\n Do you wanna play again? ");
-            // CancelCounting();
+            viewInGame.CancelCounting();
             GameManager.Instance.GameOver();
         }
     }
@@ -178,19 +186,18 @@ public class GameController : Singleton<GameController>
     }
 
 
-    public void ResetGame()
+    public void Reset()
     {
         _currentIndex = 0;
-        _currentWrong = canWrong;
         _currentTurn = null;
+        _currentWrong = canWrong;
 
         transform.DOKill();
+        viewInGame.Reset();
         gridController.Reset();
-        viewInGame.UpdateLevel(_currentIndex);
         viewInGame.UpdateWrongText(_currentWrong);
-
-        GameManager.EVENT_RESET_INGAME?.Invoke();
-        DOVirtual.DelayedCall(1f, () => { NextTurn(); });
+       
+        this.PostEvent(EventID.OnEvent_GameOver);
     }
 
 

@@ -32,7 +32,7 @@ public class ViewGameOver : View
     public override void StartState()
     {
         base.StartState();
-        ShowScore();
+        Load();
     }
 
     public override void UpdateState()
@@ -49,7 +49,7 @@ public class ViewGameOver : View
 
 
 
-    private void ShowScore()
+    private void Load()
     {
         var score = ScoreManager.Instance.score;
         var playfab = PlayfabController.Instance;
@@ -68,7 +68,7 @@ public class ViewGameOver : View
 
     public void OnClickButtonMenu()
     {
-        GameController.Instance.ResetGame();
+        GameController.Instance.Reset();
         GameManager.Instance.SetState(GameState.Menu);
         SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
     }

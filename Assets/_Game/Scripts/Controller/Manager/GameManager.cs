@@ -7,8 +7,7 @@ using Zenject;
 public class GameManager : Singleton<GameManager>
 {
 
-    // [Event]
-    public static Action EVENT_RESET_INGAME;
+    // [public]
     public GameState gameState = GameState.Menu;
 
     // [private]
@@ -43,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     public void PlayGameWithInfo()
     {
         SetState(GameState.InGame);
-        GameController.Instance.InitScene();
+        GameController.Instance.Load();
         GameController.Instance.ShowInfo(Define.TEXT_INTRO, () =>
         {
             PlayGame();
@@ -61,7 +60,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ReplayGame()
     {
-        GameController.Instance.ResetGame();
+        GameController.Instance.Reset();
+        GameController.Instance.StartDelayNextTurn();
         SetState(GameState.InGame);
         SoundManager.PlayMusic(SoundManager.MUSIC_BACKGROUND);
     }
