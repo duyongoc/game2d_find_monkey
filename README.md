@@ -1,7 +1,7 @@
 # memory_square2d
 
 Play:
-- link: https://play.unity.com/mg/other/memory_squares2d_web
+- link: https://play.unity.com/p/webgl-iqb-2/edit
 - link: https://webunity.github.io/build_web_game2d_find_monkey_1
 - link: https://webunity.github.io/build_web_game2d_find_monkey_2
 
