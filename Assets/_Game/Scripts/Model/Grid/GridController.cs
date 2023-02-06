@@ -8,7 +8,7 @@ public class GridController : MonoBehaviour
 {
 
 
-    [Space]
+    [Header("[Setting]")]
     [SerializeField] private GridLayoutGroup gridObject;
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private List<Tile> cacheTiles = new List<Tile>();

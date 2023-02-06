@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
-    [Header("Setting")]
+    [Header("[Setting]")]
     [SerializeField] private Image imgTile;
     [SerializeField] private Color colorHide;
     [SerializeField] private Color colorWhite;

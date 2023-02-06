@@ -7,12 +7,11 @@ using Zenject;
 public class GameManager : Singleton<GameManager>
 {
 
-    // [public]
+    [Header("[Setting]")]
     public GameState gameState = GameState.Menu;
 
     // [private]
     [Inject] private ViewManager _gameView;
-
 
     // [properties]
     public bool IsInGameState => gameState == GameState.InGame;

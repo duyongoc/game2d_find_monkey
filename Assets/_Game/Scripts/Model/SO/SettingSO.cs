@@ -20,7 +20,7 @@ public class TurnData
 public class SettingSO : ScriptableObject
 {
 
-    [Space]
+    [Header("[Setting]")]
     public List<TurnData> turnEasy;
     public List<TurnData> turnMedium;
     public List<TurnData> turnHard;
