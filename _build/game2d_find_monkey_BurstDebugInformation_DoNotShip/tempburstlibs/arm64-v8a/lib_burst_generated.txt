@@ -171,9 +171,11 @@ Library: lib_burst_generated
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.Services.Core.Threading.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.Services.Core.Networking.dll
+--root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.Recorder.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Assembly-CSharp-firstpass.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\UniTask.TextMeshPro.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
+--root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.Recorder.Base.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --root-assembly=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\UniTask.Addressables.dll
 --assembly-folder=C:\work\prj\game2d_find_monkey\Temp\StagingArea\Data\Managed\
