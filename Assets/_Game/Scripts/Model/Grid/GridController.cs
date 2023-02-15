@@ -31,7 +31,6 @@ public class GridController : MonoBehaviour
 
 
 
-
     public void CreateMatrix(int size)
     {
         _size = size;
@@ -75,7 +74,6 @@ public class GridController : MonoBehaviour
     {
         cacheTiles.ForEach(x => x.Load());
     }
-
 
 
     public bool CheckResult()

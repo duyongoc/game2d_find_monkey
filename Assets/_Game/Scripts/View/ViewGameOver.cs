@@ -51,7 +51,7 @@ public class ViewGameOver : View
 
     private void Load()
     {
-        var score = ScoreManager.Instance.score;
+        var score = ScoreManager.Instance.Score;
         var playfab = PlayfabController.Instance;
 
         txtScore.text = $"{score.ToString()}";

@@ -9,6 +9,7 @@ public class GameInstaller : MonoInstaller
     public sealed override void InstallBindings()
     {
         // base.InstallBindings();
+        
         // this.Container.Bind<ViewLoading>().FromComponentInHierarchy().AsSingle().Lazy();
         // this.Container.Bind<ViewInfo>().FromComponentInHierarchy().AsSingle().Lazy();
         // this.Container.Bind<ViewSetting>().FromComponentInHierarchy().AsSingle().Lazy();

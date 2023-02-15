@@ -6,9 +6,14 @@ public class ScoreManager : Singleton<ScoreManager>
 {
 
 
-    [Header("Setting")]
-    public int score;
-    public int highscore;
+    // [private] 
+    private int score;
+    private int highscore;
+
+
+    // [properties] 
+    public int Score { get => score; }
+    public int Highscore { get => highscore; }
 
 
 

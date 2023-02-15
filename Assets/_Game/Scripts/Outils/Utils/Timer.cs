@@ -7,13 +7,13 @@ using UnityEngine;
 public class Timer
 {
 
-    // private
+    // [private]
     private float _timer = 0f;
     private float _duration = 0f;
     private bool _isPause = false;
 
 
-    // properties
+    // [properties]
     public float GetTimer { get => _timer; }
     public float GetDuration { get => _duration; }
     public bool IsDone { get { return _timer == 0; } }
