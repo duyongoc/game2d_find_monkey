@@ -1,29 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@duyongoc 
-Please verify your email address to access all of GitHub’s features.
-An email containing verification instructions was sent to ongocduy98@gmail.com.
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-github
-/
-gitignore
-3k96.4k51k
- Code Pull requests 112 Actions Projects 0 Security Insights
-gitignore/Unity.gitignore
-@JasperCiti JasperCiti Add Unity's Addressables and Android's temp files. (#3311)
-dc8c27c 3 days ago
-@mviranyi@theDrake@Tandoori@shana@qCring@LucasSteer@Frozenfire92@FritzsHero@ahmyi@FutureClemens@shiftkey@ahmedbaracat@JasperCiti@matzar@networm@tim-hub@taeminhong@rpistorello@1nfinite9@owenblacker@mariuz@LotteMakesStuff@ksmit799@jstasiak@kilian442@jrreed
-70 lines (57 sloc)  1.3 KB
-  
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
@@ -107,6 +81,3 @@ API
 Training
 Blog
 About
-.DS_Store
-webgl_sharing
-connectwebgl.zip
